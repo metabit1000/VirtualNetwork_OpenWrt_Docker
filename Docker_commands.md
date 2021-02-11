@@ -5,9 +5,13 @@ https://luisiblogdeinformatica.com/docker-cheatsheet-comandos-mas-usados/
 *Online hub for public docker images*
 https://hub.docker.com/_/busybox
 
-## Useful commands (para TFG)
+## Useful commands
 
+##### Utiles en mi trabajo
+
+```
 docker run -i -t metabit1000/openwrtimage /bin/ash  (create a terminal in the openwrtimage)
+```
 
 ##### Pull an image from docker docker Hub** (to our local repository)
 
