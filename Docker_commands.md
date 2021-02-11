@@ -7,7 +7,7 @@ https://hub.docker.com/_/busybox
 
 ## Useful commands
 
-##### Utiles en mi trabajo
+##### Useful for my project
 
 ```
 docker run -i -t metabit1000/openwrtimage /bin/ash  (create a terminal in the openwrtimage)
