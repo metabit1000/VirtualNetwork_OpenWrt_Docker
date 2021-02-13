@@ -10,7 +10,7 @@ https://hub.docker.com/_/busybox
 ### Useful for my project
 
 ```
-docker exec -it metabit1000/openwrtimage /bin/ash  (create a terminal in the openwrtimage)
+docker exec -it router1 /bin/ash  (create a terminal in the openwrtimage)
 ```
 ```
 
