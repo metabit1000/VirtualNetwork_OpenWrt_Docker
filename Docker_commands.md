@@ -13,7 +13,7 @@ https://hub.docker.com/_/busybox
 docker exec -it router1 /bin/ash  (create a terminal in the openwrtimage)
 ```
 ```
-
+docker cp foo.txt mycontainer:/foo.txt  (cp file from host to container)
 ```
 
 ### More docker commands
