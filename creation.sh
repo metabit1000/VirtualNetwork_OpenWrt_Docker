@@ -8,7 +8,9 @@ docker run --name router1 -d --rm --network b1 metabit1000/openwrtimage
 docker network connect b2 router1
 
 #debian with a apache server (Internet)
-docker run --name Internet -d --rm --cap-add=NET_ADMIN --network b2 metabit1000/apacheserver
+#docker run --name Internet -d --rm --cap-add=NET_ADMIN --network b2 metabit1000/apacheserver
+
+docker run --name Internet -d --rm --cap-add=NET_ADMIN --network b2 -v "$PWD/serverContent":/usr/local/apache2/htdocs/ metabit1000/apacheserver
 
 #showing useful info
 docker ps
