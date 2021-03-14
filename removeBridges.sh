@@ -4,7 +4,7 @@
 
 for n in $(seq 1 8)
 do
-  docker network create -d bridge b${n}
+  docker network rm b${n}
 done
 
 docker network ls
