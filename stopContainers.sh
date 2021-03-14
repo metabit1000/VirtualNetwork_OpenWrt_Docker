@@ -1,11 +1,13 @@
 #!/bin/sh
 
 docker stop pc
-#docker rm pc
-
-docker stop router1
-#docker rm router1
-
+docker stop FW
+docker stop MW
+docker stop R1
+docker stop R2
+docker stop ISP1
+docker stop ISP2
 docker stop Internet
-#docker rm Internet
+
+docker ps -a #info de los containers corriendo
 
