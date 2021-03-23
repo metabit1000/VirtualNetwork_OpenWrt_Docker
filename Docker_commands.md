@@ -177,18 +177,18 @@ docker image ls
 > see docker-compose.yaml
 
 ```
-docker-compose up -d  
+docker-compose up -d
 ```
 ##### Check containers status included in docker-compose
 
 ```
-docker-compose ps  
+docker-compose ps
 ```
 ##### Logs from more run container
 
 ```
 # from all runned container
-docker-compose logs -f   
+docker-compose logs -f
 
 # from a specic container
 docker-compose logs dockerapp
