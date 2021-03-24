@@ -1,6 +1,7 @@
 #!/bin/sh
 
 docker stop pc
+docker stop droppyDMZ 
 docker stop FW
 docker stop MW
 docker stop R1
