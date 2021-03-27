@@ -2,6 +2,7 @@
 
 docker stop pc
 docker stop droppyDMZ 
+docker stop nagios
 docker stop FW
 docker stop MW
 docker stop R1

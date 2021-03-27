@@ -6,17 +6,20 @@ echo "Creating virtual network..."
 xterm -e docker run --name pc -it --rm --cap-add=NET_ADMIN --network b1 metabit1000/debian &
 
 #DMZ
-docker run --name droppyDMZ -d --rm --network b2 silverwind/droppy
+docker run --name droppyDMZ -d --rm --cap-add=NET_ADMIN --network b2 metabit1000/droppy
+docker cp serverContent/file1.txt droppyDMZ:/files/file1.txt #file d'exemple
 
 #Nagios
+docker run --name nagios -d --rm --network b3 jasonrivers/nagios:latest #temporal; hay que configurarlo bien
 
 #FW
-docker run --name FW -d --rm --network b1 metabit1000/fwrouter
+docker run --name FW -d --rm --cap-add=NET_ADMIN --network b1 metabit1000/fwrouter
 docker network connect b2 FW
 docker network connect b4 FW
+docker network connect b3 FW
 
 #MW
-docker run --name MW -d --rm --network b5 metabit1000/mwrouter
+docker run --name MW -d --rm --cap-add=NET_ADMIN --network b5 metabit1000/mwrouter
 docker network connect b4 MW
 
 #R1
@@ -43,6 +46,7 @@ docker ps -a
 
 #Setting the default route correctly of Internet and pc
 docker exec -t pc /bin/bash -c "./configDefaultRoute.sh"
-docker exec -t Internet /bin/bash -c "./configDefaultRoute.sh"
+#docker exec -t Internet /bin/bash -c "./configDefaultRoute.sh"
+docker exec -t droppyDMZ /bin/ash -c "./configDefaultRoute.sh"
 
 #menu...
