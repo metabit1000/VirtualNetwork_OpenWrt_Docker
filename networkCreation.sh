@@ -23,30 +23,40 @@ docker run --name MW -d --rm --cap-add=NET_ADMIN --network b5 metabit1000/mwrout
 docker network connect b4 MW
 
 #R1
-docker run --name R1 -d --rm --network b6 metabit1000/r1router
+docker run --name R1 -d --rm --cap-add=NET_ADMIN --network b6 metabit1000/r1router
 docker network connect b5 R1
 
 #R2
-docker run --name R2 -d --rm --network b7 metabit1000/r2router
+docker run --name R2 -d --rm --cap-add=NET_ADMIN --network b7 metabit1000/r2router
 docker network connect b5 R2
 
 #ISP1
-docker run --name ISP1 -d --rm --network b8 metabit1000/isp1router
+docker run --name ISP1 -d --rm --cap-add=NET_ADMIN --network b8 metabit1000/isp1router
 docker network connect b6 ISP1
 
 #ISP2
-docker run --name ISP2 -d --rm --network b8 metabit1000/isp2router
+docker run --name ISP2 -d --rm --cap-add=NET_ADMIN --network b8 metabit1000/isp2router
 docker network connect b7 ISP2
 
 #debian with a apache server (Internet)
 docker run --name Internet -d --rm --cap-add=NET_ADMIN --network b8 -v "$PWD/serverContent":/usr/local/apache2/htdocs/ metabit1000/apacheserver
 
 #showing useful info
+echo ''
+echo "Info of the running Docker containers:"
 docker ps -a
+echo ''
 
 #Setting the default route correctly of Internet and pc
+echo "Routing table of the pc:"
 docker exec -t pc /bin/bash -c "./configDefaultRoute.sh"
-#docker exec -t Internet /bin/bash -c "./configDefaultRoute.sh"
+echo ''
+echo "Routing table of the Internet server:"
+docker exec -t Internet /bin/bash -c "./configDefaultRoute.sh"
+echo ''
+echo "Routing table of the file server:"
 docker exec -t droppyDMZ /bin/ash -c "./configDefaultRoute.sh"
 
 #menu...
+#display Estructura/estructura.png &
+

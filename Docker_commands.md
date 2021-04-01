@@ -7,6 +7,10 @@ https://hub.docker.com/_/busybox
 
 ## Commands
 
+##Otros
+
+iptables -t nat -L
+
 ### Useful for my project
 
 ```

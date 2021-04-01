@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo "Stopping Docker containers..."
 docker stop pc
 docker stop droppyDMZ 
 docker stop nagios
