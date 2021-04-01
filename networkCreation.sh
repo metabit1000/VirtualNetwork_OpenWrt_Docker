@@ -58,5 +58,5 @@ echo "Routing table of the file server:"
 docker exec -t droppyDMZ /bin/ash -c "./configDefaultRoute.sh"
 
 #menu...
-#display Estructura/estructura.png &
+#display images/estructura.png &
 
