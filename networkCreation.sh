@@ -10,7 +10,7 @@ docker run --name droppyDMZ -d --rm --cap-add=NET_ADMIN --network b2 metabit1000
 docker cp serverContent/file1.txt droppyDMZ:/files/file1.txt #file d'exemple
 
 #Nagios
-docker run --name nagios -d --rm --network b3 jasonrivers/nagios:latest #temporal; hay que configurarlo bien
+docker run --name nagios -d --rm -p 25 -p 80:80 --network b3 quantumobject/docker-nagios
 
 #FW
 docker run --name FW -d --rm --cap-add=NET_ADMIN --network b1 metabit1000/fwrouter
