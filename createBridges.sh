@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#sudo systemctl restart docker #restart docker daemon
-
 echo "Creating bridge networks..."
 
 echo "Private IPs:"
