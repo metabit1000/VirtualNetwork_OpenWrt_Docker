@@ -3,7 +3,7 @@
 echo "Creating virtual network..."
 
 #pc with debian
-xterm -e docker run --name pc -it --rm --cap-add=NET_ADMIN --network b1 metabit1000/debian &
+xterm -e docker run --name pc -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -it --rm --cap-add=NET_ADMIN --network b1 metabit1000/debian &
 
 #DMZ
 docker run --name droppyDMZ -d --rm --cap-add=NET_ADMIN --network b2 metabit1000/droppy
@@ -39,7 +39,7 @@ docker run --name ISP2 -d --rm --cap-add=NET_ADMIN --network b8 metabit1000/isp2
 docker network connect b7 ISP2
 
 #debian with a apache server (Internet)
-docker run --name Internet -d --rm --cap-add=NET_ADMIN --network b8 -v "$PWD/serverContent":/usr/local/apache2/htdocs/ metabit1000/apacheserver
+docker run --name Internet -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -d --rm --cap-add=NET_ADMIN --network b8 -v "$PWD/serverContent":/usr/local/apache2/htdocs/ metabit1000/apacheserver
 
 #showing useful info
 echo ''
@@ -47,7 +47,7 @@ echo "Info of the running Docker containers:"
 docker ps -a
 echo ''
 
-#Setting the default route correctly of Internet and pc
+#Setting the default route correctly of Internet, pc and the file server.
 echo "Routing table of the pc:"
 docker exec -t pc /bin/bash -c "./configDefaultRoute.sh"
 echo ''
@@ -60,4 +60,5 @@ docker exec -t droppyDMZ /bin/ash -c "/etc/init.d/sshd restart" > /dev/null #ssh
 
 #menu...
 #display images/estructura.png &
+#docker exec -t Internet /bin/bash -c "firefox" &
 

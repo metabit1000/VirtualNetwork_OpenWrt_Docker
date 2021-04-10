@@ -11,6 +11,7 @@ https://hub.docker.com/_/busybox
 
 iptables -t nat -L
 scp root@10.0.2.1:.droppy/files/file1.txt file1.txt
+xhost +
 
 ### Useful for my project
 
