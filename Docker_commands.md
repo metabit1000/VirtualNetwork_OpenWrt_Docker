@@ -10,6 +10,7 @@ https://hub.docker.com/_/busybox
 ##Otros
 
 iptables -t nat -L
+scp root@10.0.2.1:.droppy/files/file1.txt file1.txt
 
 ### Useful for my project
 

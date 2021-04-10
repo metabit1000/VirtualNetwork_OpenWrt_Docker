@@ -56,6 +56,7 @@ docker exec -t Internet /bin/bash -c "./configDefaultRoute.sh"
 echo ''
 echo "Routing table of the file server:"
 docker exec -t droppyDMZ /bin/ash -c "./configDefaultRoute.sh"
+docker exec -t droppyDMZ /bin/ash -c "/etc/init.d/sshd restart" > /dev/null #ssh settings
 
 #menu...
 #display images/estructura.png &
