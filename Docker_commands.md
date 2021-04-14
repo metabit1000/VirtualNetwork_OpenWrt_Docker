@@ -9,12 +9,13 @@ https://hub.docker.com/_/busybox
 
 ##Otros
 
-iptables -t nat -L
+iptables -t nat -L OUTPUT
 scp root@10.0.2.1:.droppy/files/file1.txt file1.txt
 xhost +
 netstat -plnut
 
 docker run --name=portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+
 
 ### Useful for my project
 

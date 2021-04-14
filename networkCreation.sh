@@ -6,7 +6,7 @@ echo "Creating virtual network..."
 xterm -e docker run --name pc -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -it --rm --cap-add=NET_ADMIN --network b1 metabit1000/debian &
 
 #DMZ
-docker run --name droppyDMZ -d --rm --cap-add=NET_ADMIN --network b2 metabit1000/droppy
+docker run --name droppyDMZ -d --rm -p 8989:8989 --cap-add=NET_ADMIN --network b2 metabit1000/droppy
 docker cp serverContent/file1.txt droppyDMZ:/files/file1.txt #file d'exemple
 
 #Nagios
