@@ -1,5 +1,3 @@
-#!/bin/sh
-
 echo "Creating bridge networks..."
 
 echo "Private IPs:"
@@ -12,7 +10,9 @@ docker network create --driver=bridge --subnet=10.0.3.0/24 --ip-range=10.0.3.0/2
 
 docker network create --driver=bridge --subnet=10.0.4.0/24 --ip-range=10.0.4.0/24 --gateway=10.0.4.5 b4
 
-docker network create --driver=bridge --subnet=10.0.5.0/24 --ip-range=10.0.5.0/24 --gateway=10.0.5.5 b5
+docker network create --driver=bridge --subnet=10.5.1.0/24 --ip-range=10.5.1.0/24 --gateway=10.5.1.5 b5.1
+
+docker network create --driver=bridge --subnet=10.5.2.0/24 --ip-range=10.5.2.0/24 --gateway=10.5.2.5 b5.2
 
 echo ""
 
@@ -28,6 +28,5 @@ docker network create --driver=bridge --subnet=63.45.8.0/24 --ip-range=63.45.8.0
 echo ""
 
 docker network ls
-
 
 
