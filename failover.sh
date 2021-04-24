@@ -40,7 +40,6 @@ echo "Testing if there's some failover via wan..."
 	# fi
 # done;
 
-
 while sleep $INTERVAL
 do
 	echo "Interfaces status: "	
@@ -50,17 +49,17 @@ do
 	RET=`ping -c $PACKETS -I eth1 $TARGET | awk '/packets received/ {print $4}'`
 	if [ "$RET" -ne "$PACKETS" ]; then
 		if [ "$USINGWAN" = "1" ]; then
-			ip route del default via $WANGW metric 10
-			#uci set network.wan.metric='20'
-			ip route add default via $WANGW metric 20
+			uci set network.wan.metric='20'
+			uci set network.wanb.metric='10'
+			/etc/init.d/network restart
 			USINGWAN=2
 			echo "Changed wan to wanb"
 		fi
 	else 
 		if [ "$USINGWAN" = "2" ]; then
-			ip route del default via $WANGW metric 20
-			#uci set network.wan.metric='10'
-			ip route add default via $WANGW metric 10
+			uci set network.wan.metric='10'
+			uci set network.wanb.metric='20'
+			/etc/init.d/network restart
 			USINGWAN=1
 			echo "Route fixed. Changed wanb to wan"
 		fi

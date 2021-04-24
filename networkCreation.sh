@@ -19,7 +19,7 @@ docker network connect b4 FW
 docker network connect b3 FW
 
 #MW
-docker run --name MW -d --rm --cap-add=NET_ADMIN --network b4 metabit1000/mwrouter1
+docker run --name MW -d --rm --cap-add=NET_ADMIN --privileged --network b4 metabit1000/mwrouter1
 docker network connect b5.1 MW
 docker network connect b5.2 MW
 
@@ -58,6 +58,17 @@ echo ''
 echo "Routing table of the file server:"
 docker exec -t droppyDMZ /bin/ash -c "./configDefaultRoute.sh"
 docker exec -t droppyDMZ /bin/ash -c "/etc/init.d/sshd restart" > /dev/null #ssh settings
+
+docker exec -t MW /bin/ash -c "mwan3 stop" > /dev/null
+docker exec -t MW /bin/ash -c "ip route del default"
+docker exec -t MW /bin/ash -c "ip route del default"
+docker exec -t MW /bin/ash -c "ip route add default via 10.5.1.2 metric 10"
+docker exec -t MW /bin/ash -c "ip route add default via 10.5.2.2 metric 20"
+docker exec -t MW /bin/ash -c "sysctl -w net.ipv4.conf.eth1.rp_filter=0"
+docker exec -t MW /bin/ash -c "sysctl -w net.ipv4.conf.eth2.rp_filter=0"
+
+#Portainer to get info of the containers using a web interface
+docker run --name Portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 
 #menu...
 #display images/estructura.png &
