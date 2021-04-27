@@ -7,7 +7,7 @@ Docker info: https://www.docker.com/
 
 ## Network topology
 
-image.
+![Image of App Login](https://raw.githubusercontent.com/metabit1000/Scripts_TFG/master/images/EstructuraRed.png)
 
 ## How execute the virtual network? (steps)
 
