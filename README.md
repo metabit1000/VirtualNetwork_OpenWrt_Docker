@@ -2,8 +2,8 @@
 
 Scripts used to create my virtual network with Docker and OpenWrt.
 
-OpenWrt info: https://openwrt.org/about
-Docker info: https://www.docker.com/
+- OpenWrt info: https://openwrt.org/about
+- Docker info: https://www.docker.com/
 
 ## Network topology
 
