@@ -21,7 +21,10 @@ When all the virtual network is running, it is time to do some testing on it. Bl
 
 **Important:**
 If you want to access to each container individually, you have to execute the following command:
+``
 docker exec -it container_name type
+``
+
 Where type can be:
 - /bin/ash --> All OpenWrt routers and droppyDMZ 
 - /bin/bash --> Internet and pc
