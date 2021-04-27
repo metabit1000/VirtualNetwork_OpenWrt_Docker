@@ -11,5 +11,6 @@ apt-cache policy docker-ce
 sudo apt install docker-ce
 
 #Allow using docker commands without sudo
-sudo usermod -aG docker ${USER}
-su - ${USER}
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
