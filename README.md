@@ -17,13 +17,13 @@ image.
 4. Stop the containers and then the virtual network with stopContainers.sh.
 5. If you open your browser and you use url: localhost:9000, you will see images and containers info (using a web interface instead of using docker commands).
 
-When all the virtual network is running, it is time to do some testing on it. 
+When all the virtual network is running, it is time to do some testing on it. Black terminal (xterm) is pc.
 
-*Important*
+**Important:**
 If you want to access to each container individually, you have to execute the following command:
 docker exec -it container_name type
 Where type can be:
-/bin/ash --> All OpenWrt routers and droppyDMZ 
-/bin/bash --> Internet and pc
+- /bin/ash --> All OpenWrt routers and droppyDMZ 
+- /bin/bash --> Internet and pc
 
 You can access to the router configuration via Luci, just using its url in your browser. (it can be accessible this way because of the bridge network gateway)
