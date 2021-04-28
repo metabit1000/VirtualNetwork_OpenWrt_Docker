@@ -59,13 +59,11 @@ echo "Routing table of the file server:"
 docker exec -t droppyDMZ /bin/ash -c "./configDefaultRoute.sh"
 docker exec -t droppyDMZ /bin/ash -c "/etc/init.d/sshd restart" > /dev/null #ssh settings
 
-docker exec -t MW /bin/ash -c "mwan3 stop" > /dev/null
-docker exec -t MW /bin/ash -c "ip route del default"
-docker exec -t MW /bin/ash -c "ip route del default"
-docker exec -t MW /bin/ash -c "ip route add default via 10.5.1.2 metric 10"
-docker exec -t MW /bin/ash -c "ip route add default via 10.5.2.2 metric 20"
-docker exec -t MW /bin/ash -c "sysctl -w net.ipv4.conf.eth1.rp_filter=0"
-docker exec -t MW /bin/ash -c "sysctl -w net.ipv4.conf.eth2.rp_filter=0"
+#Mwan3 settings
+docker exec -t MW /bin/ash -c "echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter"
+docker exec -t MW /bin/ash -c "echo 0 > /proc/sys/net/ipv4/conf/eth2/rp_filter"
+docker cp failover.sh MW:failover.sh
+docker exec -t MW /bin/ash -c "mwan3 start" > /dev/null
 
 #Portainer to get info of the containers using a web interface
 docker run --name Portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
