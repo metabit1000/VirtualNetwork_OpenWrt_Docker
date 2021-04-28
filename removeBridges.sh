@@ -8,4 +8,7 @@ do
   docker network rm b${n}
 done
 
+docker network rm b5.1
+docker network rm b5.2
+
 docker network ls
