@@ -19,7 +19,7 @@ docker network connect b4 FW
 docker network connect b3 FW
 
 #MW
-docker run --name MW -d --rm --cap-add=NET_ADMIN --privileged --network b4 metabit1000/mwrouter1
+docker run --name MW -d --rm --cap-add=NET_ADMIN --privileged --network b4 metabit1000/mwrouter1 #change between 1 if failover or 2 if load balanced
 docker network connect b5.1 MW
 docker network connect b5.2 MW
 
