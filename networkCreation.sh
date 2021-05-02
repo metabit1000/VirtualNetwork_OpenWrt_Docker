@@ -52,10 +52,7 @@ echo ''
 echo "Routing table of the pc:"
 docker exec -t pc /bin/bash -c "./configDefaultRoute.sh"
 echo ''
-echo "Routing table of the nagios server:"
-docker exec -t nagios /bin/bash -c "./configRoute.sh"
 docker exec -t nagios /bin/bash -c "/etc/init.d/ssh start" > /dev/null
-echo ''
 echo "Routing table of the Internet server:"
 docker exec -t Internet /bin/bash -c "./configDefaultRoute.sh"
 echo ''
