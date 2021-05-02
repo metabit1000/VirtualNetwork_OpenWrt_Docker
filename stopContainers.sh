@@ -12,7 +12,6 @@ docker stop ISP1
 docker stop ISP2
 docker stop Internet
 docker stop Portainer
-docker rm Portainer
 
 docker ps -a #info de los containers corriendo
 

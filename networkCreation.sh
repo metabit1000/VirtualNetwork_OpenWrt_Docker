@@ -10,7 +10,7 @@ docker run --name droppyDMZ -d --rm -p 8989:8989 --cap-add=NET_ADMIN --network b
 docker cp serverContent/file1.txt droppyDMZ:/files/file1.txt #file d'exemple
 
 #Nagios
-docker run --name nagios -d --rm -p 25 -p 80:80 --network b3 quantumobject/docker-nagios
+docker run --name nagios -d --rm -p 22 -p 25 -p 80:80 --cap-add=NET_ADMIN --network b3 metabit1000/nagios
 
 #FW
 docker run --name FW -d --rm --cap-add=NET_ADMIN --network b1 metabit1000/fwrouter
@@ -23,11 +23,11 @@ docker run --name MW -d --rm --cap-add=NET_ADMIN --privileged --network b4 metab
 docker network connect b5.1 MW
 docker network connect b5.2 MW
 
-#R1 #cambiar...
+#R1 
 docker run --name R1 -d --rm --cap-add=NET_ADMIN --network b6 metabit1000/r1router
 docker network connect b5.1 R1
 
-#R2 #cambiar...
+#R2 
 docker run --name R2 -d --rm --cap-add=NET_ADMIN --network b7 metabit1000/r2router
 docker network connect b5.2 R2
 
@@ -52,6 +52,10 @@ echo ''
 echo "Routing table of the pc:"
 docker exec -t pc /bin/bash -c "./configDefaultRoute.sh"
 echo ''
+echo "Routing table of the nagios server:"
+docker exec -t nagios /bin/bash -c "./configRoute.sh"
+docker exec -t nagios /bin/bash -c "/etc/init.d/ssh start" > /dev/null
+echo ''
 echo "Routing table of the Internet server:"
 docker exec -t Internet /bin/bash -c "./configDefaultRoute.sh"
 echo ''
@@ -66,7 +70,7 @@ docker cp failover.sh MW:failover.sh
 docker exec -t MW /bin/ash -c "mwan3 start" > /dev/null
 
 #Portainer to get info of the containers using a web interface
-docker run --name Portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+docker run --name Portainer --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 
 #menu...
 #display images/estructura.png &
