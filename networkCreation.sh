@@ -51,7 +51,6 @@ echo ''
 #Setting the default route correctly of Internet, pc and the file server.
 echo "Routing table of the pc:"
 docker exec -t pc /bin/bash -c "./configDefaultRoute.sh"
-echo ''
 docker exec -t nagios /bin/bash -c "/etc/init.d/ssh start" > /dev/null
 echo "Routing table of the Internet server:"
 docker exec -t Internet /bin/bash -c "./configDefaultRoute.sh"
