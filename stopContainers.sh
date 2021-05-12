@@ -14,4 +14,5 @@ docker stop Internet
 docker stop Portainer
 
 docker ps -a #info de los containers corriendo
+rm -rf serverContent/serverContent 
 

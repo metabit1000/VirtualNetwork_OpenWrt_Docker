@@ -39,8 +39,10 @@ docker network connect b6 ISP1
 docker run --name ISP2 -d --rm --cap-add=NET_ADMIN --network b8 metabit1000/isp2router
 docker network connect b7 ISP2
 
+
+tar -xzvf serverContent/serverContent.tar.gz -C ./serverContent > /dev/null
 #debian with a apache server (Internet)
-docker run --name Internet -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -d --rm --cap-add=NET_ADMIN --network b8 -v "$PWD/serverContent":/usr/local/apache2/htdocs/ metabit1000/apacheserver
+docker run --name Internet -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -d --rm --cap-add=NET_ADMIN --network b8 -v "$PWD/serverContent/serverContent":/usr/local/apache2/htdocs/ metabit1000/apacheserver
 
 #showing useful info
 echo ''
