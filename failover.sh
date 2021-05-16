@@ -35,6 +35,3 @@ do
 		fi
 	fi
 done;
-
-#ubus call network.interface.wan down && ubus call network.interface.wan up
-
