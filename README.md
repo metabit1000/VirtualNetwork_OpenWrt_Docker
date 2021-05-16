@@ -26,7 +26,7 @@ docker exec -it container_name type
 ``
 
 Where type can be:
-- /bin/ash --> All OpenWrt routers and droppyDMZ 
-- /bin/bash --> Internet and pc
+- /bin/ash --> All OpenWrt routers and droppyDMZ.
+- /bin/bash --> Internet, pc and nagios.
 
 You can access to the router configuration via Luci, just using its url in your browser. And using ssh -p 22 root@router_ip. (it can be accessible this way because of the bridge network gateway)
