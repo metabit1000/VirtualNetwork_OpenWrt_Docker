@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 TARGET="63.45.8.3"
 PACKETS=1
@@ -8,26 +8,35 @@ Please make sure that the redundancy option (mwan3, vrrp or code) is running."
 echo "Do you want to continue?(yes/no)"
 read input
 
+echo "Current route: "
+docker exec -t pc /bin/bash -c "traceroute 63.45.8.3"
+
 if [ "$input" == "yes" ]; then
-	echo "Stoping eth0 interface of R1 router"
+	echo "Stopping eth0 interface of R1 router"
 	docker exec -t R1 /bin/ash -c "ubus call network.interface.lan down"
-	
+	sleep 3
 	echo "Starting timer"
 	start_time="$(date -u +%s.%N)"
-	while [ "$RET" -ne "$PACKETS" ] #checking if the route has changed
+	RET=`docker exec -t pc /bin/bash -c "ping -c 1 -w 1 63.45.8.3 | grep -oP '\d+(?= received)'"`
+	sleep 1
+	echo $RET
+	echo "$RET"
+	while [[ $RET < 1 ]] #checking if the route has changed
 	do
-		RET=`docker exec -t pc /bin/bash -c "ping -c $PACKETS $TARGET | awk '/packets received/ {print $4}'"`
-	done;
-	echo "Route changed. Backup set."
+		RET=`docker exec -t pc /bin/bash -c "ping -c 1 -w 1 63.45.8.3 | grep -oP '\d+(?= received)'"`
+		echo $RET
+	done
+	echo "Route changed. Backup route set."
 	end_time="$(date -u +%s.%N)"
 	
 	elapsed="$(bc <<<"$end_time-$start_time")"
-	echo "Total of $elapsed seconds elapsed"
+	echo "Total of $elapsed seconds elapsed (FAILOVER)"
 	
-	echo "Test finished. Do you want to restart eth1 interface?"
+	echo "Do you want to restart eth1 interface? (yes/no)"
 	read input
 	if [ "$input" == "yes" ]; then
 		docker exec -t R1 /bin/ash -c "ubus call network.interface.lan up"
 		echo "done"
 	fi
 fi
+echo "Test finished"
