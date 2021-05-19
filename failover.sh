@@ -1,6 +1,6 @@
 #!/bin/sh
 
-INTERVAL=10
+INTERVAL=5
 TARGET="63.45.8.3"
 PACKETS=1
 USINGWAN=1 #by default wan interface is working

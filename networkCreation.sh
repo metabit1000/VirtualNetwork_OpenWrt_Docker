@@ -53,7 +53,6 @@ echo ''
 #Setting the default route correctly of Internet, pc and the file server.
 echo "Routing table of the pc:"
 docker exec -t pc /bin/bash -c "./configDefaultRoute.sh"
-docker exec -t nagios /bin/bash -c "/etc/init.d/ssh start" > /dev/null
 echo "Routing table of the Internet server:"
 docker exec -t Internet /bin/bash -c "./configDefaultRoute.sh"
 echo ''
@@ -63,12 +62,16 @@ docker exec -t droppyDMZ /bin/ash -c "/etc/init.d/sshd restart" > /dev/null #ssh
 
 #Mwan3 settings
 docker exec -t MW /bin/ash -c "echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter"
+docker exec -t MW /bin/ash -c "echo 0 > /proc/sys/net/ipv4/conf/eth1/rp_filter"
 docker exec -t MW /bin/ash -c "echo 0 > /proc/sys/net/ipv4/conf/eth2/rp_filter"
 docker cp failover.sh MW:failover.sh
 docker exec -t MW /bin/ash -c "mwan3 start" > /dev/null
 
 #Portainer to get info of the containers using a web interface
 docker run --name Portainer --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+
+docker exec -t nagios /bin/bash -c "/etc/init.d/ssh start" > /dev/null
+docker exec -t nagios /bin/bash -c "./configRoute.sh" > /dev/null
 
 #menu...
 #display images/estructura.png &

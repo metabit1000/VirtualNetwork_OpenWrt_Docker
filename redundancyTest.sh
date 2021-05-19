@@ -14,17 +14,13 @@ docker exec -t pc /bin/bash -c "traceroute 63.45.8.3"
 if [ "$input" == "yes" ]; then
 	echo "Stopping eth0 interface of R1 router"
 	docker exec -t R1 /bin/ash -c "ubus call network.interface.lan down"
-	sleep 3
 	echo "Starting timer"
 	start_time="$(date -u +%s.%N)"
 	RET=`docker exec -t pc /bin/bash -c "ping -c 1 -w 1 63.45.8.3 | grep -oP '\d+(?= received)'"`
 	sleep 1
-	echo $RET
-	echo "$RET"
 	while [[ $RET < 1 ]] #checking if the route has changed
 	do
 		RET=`docker exec -t pc /bin/bash -c "ping -c 1 -w 1 63.45.8.3 | grep -oP '\d+(?= received)'"`
-		echo $RET
 	done
 	echo "Route changed. Backup route set."
 	end_time="$(date -u +%s.%N)"
@@ -36,7 +32,22 @@ if [ "$input" == "yes" ]; then
 	read input
 	if [ "$input" == "yes" ]; then
 		docker exec -t R1 /bin/ash -c "ubus call network.interface.lan up"
-		echo "done"
+		echo "Starting timer"
+		start_time="$(date -u +%s.%N)"
+		RES=`docker exec -t MW /bin/ash -c "ping -c 1 -w 1 -I eth1 63.45.8.3 | awk '/received/'"`
+		RET=$(echo $RES | awk '{print $4}')
+		echo $RET
+		read input
+		while [[ $RET < 1 ]]
+		do
+			RES=`docker exec -t MW /bin/ash -c "ping -c 1 -w 1 -I eth1 63.45.8.3 | awk '/received/'"`
+			RET=$(echo $RES | awk '{print $4}')
+		done
+		echo "Route changed. Primary route set."
+		end_time="$(date -u +%s.%N)"
+		
+		elapsed="$(bc <<<"$end_time-$start_time")"
+		echo "Total of $elapsed seconds elapsed (RECOVERY)"
 	fi
 fi
 echo "Test finished"
