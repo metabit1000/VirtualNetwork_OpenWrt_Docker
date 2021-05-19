@@ -72,6 +72,7 @@ docker run --name Portainer --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/ru
 
 docker exec -t nagios /bin/bash -c "/etc/init.d/ssh start" > /dev/null
 docker exec -t nagios /bin/bash -c "./configRoute.sh" > /dev/null
+#docker exec -t nagios /bin/bash -c "/etc/init.d/apache2 reload" > /dev/null
 
 #menu...
 #display images/estructura.png &
