@@ -36,8 +36,6 @@ if [ "$input" == "yes" ]; then
 		start_time="$(date -u +%s.%N)"
 		RES=`docker exec -t MW /bin/ash -c "ping -c 1 -w 1 -I eth1 63.45.8.3 | awk '/received/'"`
 		RET=$(echo $RES | awk '{print $4}')
-		echo $RET
-		read input
 		while [[ $RET < 1 ]]
 		do
 			RES=`docker exec -t MW /bin/ash -c "ping -c 1 -w 1 -I eth1 63.45.8.3 | awk '/received/'"`
