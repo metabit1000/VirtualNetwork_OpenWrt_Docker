@@ -19,7 +19,7 @@ docker network connect b4 FW
 docker network connect b3 FW
 
 #MW
-docker run --name MW -d --rm --cap-add=NET_ADMIN --network b4 metabit1000/mwrouter
+docker run --name MW -d --rm --cap-add=NET_ADMIN --network b4 metabit1000/mwrouter3
 docker network connect b5 MW
 
 #R1 
