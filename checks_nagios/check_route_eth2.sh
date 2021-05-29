@@ -1,9 +1,9 @@
 #!/bin/sh
 
-RES=`ping -c 1 -I eth2 63.45.8.3 | awk '/packets received/ {print $4}'`
+RES=`ping -c 1 63.45.7.2 | awk '/packets received/ {print $4}'`
 
-if [ "$RET" -ne "1" ]; then
-	echo 2
-else 
-	echo 0
+if [ "$RES" == "1" ]; then
+        echo 0
+else
+        echo 2
 fi
