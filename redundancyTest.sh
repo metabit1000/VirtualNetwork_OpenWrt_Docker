@@ -12,7 +12,7 @@ echo "Current route: "
 docker exec -t pc /bin/bash -c "traceroute 63.45.8.3"
 
 if [ "$input" == "yes" ]; then
-	echo "Stopping eth0 interface of R1 router"
+	echo "Stopping eth1 interface of R1 router"
 	docker exec -t R1 /bin/ash -c "ubus call network.interface.lan down"
 	echo "Starting timer"
 	start_time="$(date -u +%s.%N)"
@@ -34,11 +34,11 @@ if [ "$input" == "yes" ]; then
 		docker exec -t R1 /bin/ash -c "ubus call network.interface.lan up"
 		echo "Starting timer"
 		start_time="$(date -u +%s.%N)"
-		RES=`docker exec -t MW /bin/ash -c "ping -c 1 -w 1 -I eth1 63.45.8.3 | awk '/received/'"`
+		RES=`docker exec -t pc /bin/bash -c "ping -c 1 -w 1 63.45.6.2 | awk '/received/'"`
 		RET=$(echo $RES | awk '{print $4}')
 		while [[ $RET < 1 ]]
 		do
-			RES=`docker exec -t MW /bin/ash -c "ping -c 1 -w 1 -I eth1 63.45.8.3 | awk '/received/'"`
+			RES=`docker exec -t pc /bin/bash -c "ping -c 1 -w 1 63.45.6.2 | awk '/received/'"`
 			RET=$(echo $RES | awk '{print $4}')
 		done
 		echo "Route changed. Primary route set."
