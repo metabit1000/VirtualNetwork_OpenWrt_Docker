@@ -3,7 +3,7 @@
 echo "Creating virtual network..."
 
 #pc with debian
-xterm -e docker run --name pc -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -it --rm --cap-add=NET_ADMIN --network b1 metabit1000/debian &
+xterm -xrm 'XTerm*selectToClipboard: true' -e docker run --name pc -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -it --rm --cap-add=NET_ADMIN --network b1 metabit1000/debian &
 
 #DMZ
 docker run --name droppyDMZ -d --rm -p 8989:8989 --cap-add=NET_ADMIN --network b2 metabit1000/droppy
@@ -74,7 +74,9 @@ docker exec -t nagios /bin/bash -c "/etc/init.d/ssh start" > /dev/null
 docker exec -t nagios /bin/bash -c "./configRoute.sh" > /dev/null
 #docker exec -t nagios /bin/bash -c "/etc/init.d/apache2 reload" > /dev/null
 
-#menu...
-#display images/estructura.png &
-#docker exec -t Internet /bin/bash -c "firefox" &
+firefox -new-tab -url localhost:9000
+
+#show network structure
+eog images/EstructuraRed.png &
+
 
