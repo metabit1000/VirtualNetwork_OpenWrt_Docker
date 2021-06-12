@@ -54,6 +54,6 @@ In check_nagios folder, you can find the the nagios plugins and the scripts exec
 
 ## Demo
 
-![alt text](https://github.com/metabit1000/Scripts_TFG/blob/master/videos/demo1.gif)
+![alt text](https://github.com/metabit1000/Scripts_TFG/blob/master/videos/demo.gif)
 
 Feel free to use it for own interests and improve it!
