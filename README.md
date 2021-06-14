@@ -44,7 +44,7 @@ You can access to the router configuration via Luci, just using its url in your 
 ## Scripts and its use in the project
 
 - configDefaultRoute.sh: Code executed in pc, file server and nagios to configure the correct default route.
-- createBridges.sh: Code that creates the docker network bridges to provide connectivity between the different containers (see network structure to understand better)
+- createBridges.sh: Code that creates the docker network bridges to provide connectivity between the different containers (see network structure to understand it better)
 - docker_config.sh: It has the commands to install Docker and the way to not use sudo when docker command is executed.
 - failover.sh: One of the alternatives to have Internet access redundancy. Own code. 
 - networkCreation.sh: Code that creates all the virtual network.
