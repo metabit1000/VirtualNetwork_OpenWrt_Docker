@@ -23,7 +23,7 @@ Links to the redundancy packets (OpenWrt):
 2. Create network bridges with createBridges.sh. (mandatory)
 3. Execute the virtual network with networkCreation.sh or vrrpNetworkCreation.sh. NetworkCreation executes the virtual network using mwan3 and vrrpNetworkCreation.sh using keedpalived. The first time takes at least 5-6 min (depends on your Internet connection) to download all the images from docker hub to your local repository.
 4. If you open your browser and you use url: localhost:9000, you will see images and containers info (using a web interface instead of using docker commands).
-5. Stop the containers and then the virtual network with stopContainers.sh.
+5. When you finish testing, stop the containers and then the virtual network with stopContainers.sh.
 
 When all the virtual network is running, it is time to do some testing on it. Black terminal (xterm) is pc.
 
