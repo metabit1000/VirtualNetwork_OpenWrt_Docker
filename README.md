@@ -28,7 +28,9 @@ Links to the redundancy packets (OpenWrt):
 When all the virtual network is running, it is time to do some testing on it. Black terminal (xterm) is pc.
 
 **Important:**
-If you want to access to each container individually, you have to execute the following command:
+If you want to access to each container individually, you have to execute the following command: 
+
+
 ``
 docker exec -it container_name type
 ``
