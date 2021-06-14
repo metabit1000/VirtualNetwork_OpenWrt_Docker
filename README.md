@@ -53,7 +53,7 @@ You can access to the router configuration via Luci, just using its url in your 
 - removeBridges.sh: Useful code if you want to remove the docker network bridges of your computer.
 - stopContainers.sh: Code to stop the virtual network. 
 
-In check_nagios folder, you can find the the nagios plugins and the scripts executed in MW router.
+In check_nagios folder, you can find the the nagios plugins and the scripts executed in MW router. In vrrp_configs and mwan3_configs folders, you can find the configurations applied in the virtual network.
 
 ## Demo
 
