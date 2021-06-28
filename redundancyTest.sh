@@ -8,6 +8,13 @@ Please make sure that the redundancy option (mwan3, vrrp or code) is running."
 echo "Do you want to continue?(yes/no)"
 read input
 
+echo "Checking if virtual network is running..."
+aux="$( docker container inspect -f '{{.State.Running}}' pc 2>/dev/null)" 
+if [ "$aux" != "true" ]; then
+	echo "ERROR. First, start the virtual network and then run again."
+	exit 1
+fi
+
 echo "Current route: "
 docker exec -t pc /bin/bash -c "traceroute 63.45.8.3"
 
